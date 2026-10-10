@@ -35,4 +35,4 @@ Vite automatically sets the correct base path for project Pages sites using the 
 - Desktop Print/Open launches the GitHub blob page, which requires a GitHub login with repository access for private files. On mobile, it opens an authenticated, temporary Blob URL; some browsers may block popups or be unable to display a given file type.
 - GitHub's Contents API limits a file to 100 MB and a directory listing to 1,000 entries. GitHub may impose additional API rate limits and content response constraints. Uploads are sequential and show per-file progress, not byte-level progress. A failed upload in a multi-file selection does not roll back files already committed.
 - Changes are committed directly to the selected branch. The app does not provide conflict resolution, history, or recovery beyond GitHub's repository history.
-- The app requires network access to GitHub's REST API and does not proxy requests through a server.
+- The app requires network access to GitHub's REST API and does not proxy requests through a server
