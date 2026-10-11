@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   Activity, ArrowDownAZ, ArrowUpDown, ArrowUpRight, Check, ChevronRight, Code2, Download, FileArchive,
   File as FileIcon, FileAudio2, FileImage, FileText, FileVideo2, Folder, FolderOpen, Github, Grid2X2,
-  HardDrive, Info, LayoutGrid, List, LoaderCircle, LockKeyhole, MoreHorizontal, PanelTop, ScanLine,
-  Plus, Printer, Search, Settings, Share2, ShieldCheck, Trash2, Upload, X,
+  Info, LayoutGrid, List, LoaderCircle, LockKeyhole, MoreHorizontal, PanelTop, ScanLine,
+  Plus, Search, Settings, Share2, ShieldCheck, Trash2, Upload, X,
 } from 'lucide-react'
 
 type SettingsForm = { username: string; owner: string; repo: string; branch: string; token: string }
@@ -363,40 +363,14 @@ Köszönjük, hogy tiszteletben tartod az alkotó munkáját.`)
     }
   }
 
-  const printFile = async (entry: Entry) => {
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || navigator.maxTouchPoints > 1
-    if (!isMobile) {
-      const blobUrl = config ? `https://github.com/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repo)}/blob/${encodeURIComponent(config.branch)}/${entry.path.split('/').map(encodeURIComponent).join('/')}` : ''
-      window.open(blobUrl, '_blank', 'noopener,noreferrer')
-      setNotice({ kind: 'success', text: 'A GitHub új lapon nyílt meg. Privát fájl megtekintéséhez GitHub-hitelesítés és adattár-hozzáférés szükséges. A hitelesített eléréshez használd itt az Előnézet vagy a Letöltés lehetőséget.' })
-      return
-    }
-    const opened = window.open('', '_blank')
-    if (opened) opened.opener = null
-    try {
-      const blob = await readBlob(entry)
-      const url = URL.createObjectURL(blob)
-      if (opened) {
-        opened.location.href = url
-        window.setTimeout(() => URL.revokeObjectURL(url), 60_000)
-      } else {
-        saveBlob(blob, entry.name)
-        setNotice({ kind: 'success', text: 'A böngésző letiltotta az új lap megnyitását, ezért a hitelesítést igénylő fájl letöltődött.' })
-      }
-    } catch (error) {
-      opened?.close()
-      setNotice({ kind: 'error', text: errorMessage(error, 'A fájl megnyitása nem sikerült.') })
-    }
-  }
-
   const breadcrumbs = ['', ...path.split('/').filter(Boolean)]
 
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <a className="brand" href="#" onClick={event => event.preventDefault()}>
-          <span className="brand-mark"><HardDrive size={20} /></span>
-          <span>vault<span className="brand-dot">.</span><small>PRIVÁT FÁJLOK</small></span>
+          <img className="brand-logo" src="/logo.jpeg" alt="" />
+          <span>SpineBalance<small>PRIVÁT FÁJLOK</small></span>
         </a>
         <div className="side-label">MUNKATERÜLET</div>
         <button className={`nav-item ${activeTab === 'files' ? 'active' : ''}`} onClick={() => { setActiveTab('files'); setPath(''); if (config) void loadFolder('', config) }}>
@@ -423,7 +397,7 @@ Köszönjük, hogy tiszteletben tartod az alkotó munkáját.`)
 
       <main className="main">
         <header className="topbar">
-          <div className="mobile-brand"><span className="brand-mark"><HardDrive size={18} /></span><b>vault<span className="brand-dot">.</span></b></div>
+          <div className="mobile-brand"><img className="brand-logo" src="/logo.jpeg" alt="" /><b>SpineBalance</b></div>
           <div className="top-context"><span className="context-dot" /> PRIVÁT MUNKATERÜLET <ChevronRight size={14} /> <span>{activeTab === 'anatomy' ? '3D anatómia' : 'Fájlböngésző'}</span></div>
           <div className="top-actions"><span className="online-pill"><span /> BIZTONSÁGOS MUNKAMENET</span><button className="icon-button settings-shortcut" aria-label="Beállítások" onClick={() => setSettingsOpen(true)}><Settings size={19} /></button></div>
         </header>
@@ -518,7 +492,7 @@ Köszönjük, hogy tiszteletben tartod az alkotó munkáját.`)
                         </button>
                         <span className="file-size">{entry.type === 'dir' ? '—' : formatBytes(entry.size)}</span><span className="commit-label">—</span>
                         <div className="row-actions">
-                          {entry.type === 'file' && <><button className="row-action" title="Előnézet" aria-label={`Előnézet: ${entry.name}`} onClick={() => void openPreview(entry)}><PanelTop size={16} /></button><button className="row-action" title="Letöltés" aria-label={`Letöltés: ${entry.name}`} onClick={() => void downloadFile(entry)}><Download size={16} /></button><button className="row-action" title="Megosztás" aria-label={`Megosztás: ${entry.name}`} onClick={() => void shareFile(entry)}><Share2 size={16} /></button><button className="row-action" title="Nyomtatás / megnyitás" aria-label={`Nyomtatás vagy megnyitás: ${entry.name}`} onClick={() => void printFile(entry)}><Printer size={16} /></button></>}
+                          {entry.type === 'file' && <><button className="row-action" title="Előnézet" aria-label={`Előnézet: ${entry.name}`} onClick={() => void openPreview(entry)}><PanelTop size={16} /></button><button className="row-action" title="Megosztás" aria-label={`Megosztás: ${entry.name}`} onClick={() => void shareFile(entry)}><Share2 size={16} /></button></>}
                           {entry.type === 'file' && <button className="row-action delete-action" title="Törlés" aria-label={`Törlés: ${entry.name}`} onClick={() => void deleteFile(entry)}><Trash2 size={16} /></button>}
                         </div>
                       </div>)}

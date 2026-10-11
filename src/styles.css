@@ -23,8 +23,8 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .app-shell { min-height: 100vh; }
 .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 3; display: flex; width: 248px; flex-direction: column; padding: 28px 19px 17px; background: #fff; border-right: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; font: 800 22px 'Manrope', sans-serif; letter-spacing: -1px; }
-.brand-mark { display: grid; width: 38px; height: 38px; place-items: center; color: #fff; border-radius: 12px; background: #1e8069; box-shadow: 0 5px 12px #19866c2b; }
-.brand-dot, .heading-period { color: #54ae93; }
+.brand-logo { display: block; width: 38px; height: 38px; flex: 0 0 auto; border-radius: 10px; object-fit: cover; }
+.heading-period { color: #54ae93; }
 .brand small { display: block; margin-top: 1px; color: #929aa7; font: 700 9px 'DM Sans', sans-serif; letter-spacing: 1.7px; }
 .side-label { margin: 47px 0 12px 11px; color: #a0a7b2; font-size: 10px; font-weight: 700; letter-spacing: 1.35px; }
 .nav-item { display: flex; height: 43px; align-items: center; gap: 11px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: #737d8d; text-align: left; font-size: 13px; cursor: pointer; }
@@ -243,7 +243,7 @@ kbd { flex: 0 0 auto; padding: 2px 4px; border: 1px solid #eceef0; border-radius
   .main { margin-left: 0; }
   .topbar { height: 57px; padding: 0 19px; }
   .mobile-brand { display: flex; align-items: center; gap: 8px; color: #303946; font: 800 18px 'Manrope', sans-serif; letter-spacing: -.7px; }
-  .mobile-brand .brand-mark { width: 31px; height: 31px; border-radius: 9px; }
+  .mobile-brand .brand-logo { width: 31px; height: 31px; border-radius: 8px; }
   .top-context { display: none; }
   .top-actions { gap: 7px; }
   .online-pill { padding: 6px 8px; font-size: 7px; }
