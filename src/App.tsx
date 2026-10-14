@@ -5,7 +5,6 @@ import {
   Info, LayoutGrid, List, LoaderCircle, LockKeyhole, MoreHorizontal, PanelTop, ScanLine,
   Plus, Search, Settings, Share2, ShieldCheck, Trash2, Upload, X,
 } from 'lucide-react'
-
 type SettingsForm = { username: string; owner: string; repo: string; branch: string; token: string }
 type Config = Omit<SettingsForm, 'token'> & { token: string }
 type Entry = { name: string; path: string; sha: string; size: number; type: 'file' | 'dir'; download_url?: string }
@@ -369,7 +368,8 @@ Köszönjük, hogy tiszteletben tartod az alkotó munkáját.`)
     <div className="app-shell">
       <aside className="sidebar">
         <a className="brand" href="#" onClick={event => event.preventDefault()}>
-          <img className="brand-logo" src="../logo.png" alt="logo" />
+          
+          <img className="brand-logo" src="../../logo.png" alt="logo" />
           <span>SpineBalance<small>PRIVÁT FÁJLOK</small></span>
         </a>
         <div className="side-label">MUNKATERÜLET</div>
@@ -397,7 +397,7 @@ Köszönjük, hogy tiszteletben tartod az alkotó munkáját.`)
 
       <main className="main">
         <header className="topbar">
-          <div className="mobile-brand"><img className="brand-logo" src="../logo.png" alt="" /><b>SpineBalance</b></div>
+          <div className="mobile-brand"><img className="brand-logo" src="../../logo.png" alt="logo" /><b>SpineBalance</b></div>
           <div className="top-context"><span className="context-dot" /> PRIVÁT MUNKATERÜLET <ChevronRight size={14} /> <span>{activeTab === 'anatomy' ? '3D anatómia' : 'Fájlböngésző'}</span></div>
           <div className="top-actions"><span className="online-pill"><span /> BIZTONSÁGOS MUNKAMENET</span><button className="icon-button settings-shortcut" aria-label="Beállítások" onClick={() => setSettingsOpen(true)}><Settings size={19} /></button></div>
         </header>
